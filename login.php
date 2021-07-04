@@ -26,7 +26,7 @@
    $num=mysqli_fetch_array($query);
    if($num>0)
    {
-   $extra="my-cart.php";
+   $extra="index.php";
    $_SESSION['login']=$_POST['email'];
    $_SESSION['id']=$num['id'];
    $_SESSION['username']=$num['name'];
@@ -66,6 +66,10 @@
       <!-- Bootstrap Core CSS -->
       <link rel="stylesheet" href="assets/css/bootstrap.min.css">
       <link rel="stylesheet" href="assets/css/main.css">
+      <link rel="stylesheet" href="assets/css/blogpage.css">
+      <link rel="stylesheet" href="assets/css/shoppingcart.css">
+      <link rel="stylesheet" href="assets/css/topbar.css">
+      <link rel="stylesheet" href="assets/css/checkoutbox.css">
       <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
       
       <script type="text/javascript">
@@ -83,7 +87,9 @@
    </head>
    <body class="cnt-home">
       <header class="navbar navbar-light bg-light">
-         <?php include('includes/menu-bar.php');?>
+      <?php include('includes/topHeader.php');?>
+         <?php include('includes/main-header.php');?>
+         <?php include('includes/newmenu.php');?>
       </header>
       <h1 style="text-align:center">Welcome to Infinity PC Solutions</h1>
       <div class="body-content outer-top-bd">
@@ -128,7 +134,8 @@
                         </div>
                         <div class="form-group">
                            <label class="info-title" for="password">Password </label>
-                           <input type="password" class="form-control unicase-form-control text-input" id="password" name="password"  required >
+                           <input type="password" class="form-control unicase-form-control text-input" id="password" name="password" title="Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required >
+                           <p><span>*</span>Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters<p>
                         </div>
                         <div class="form-group">
                            <label class="info-title" for="confirmpassword">Confirm Password </label>
@@ -141,7 +148,7 @@
                </div>
                <!-- /.row -->
             </div>
-            <?php include('includes/brands-slider.php');?>
+           
          </div>
       </div>
       <?php include('includes/footer.php');?>

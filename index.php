@@ -32,26 +32,28 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
       <meta name="description" content="">
       <title>INFINITY PC SOLUTIONS</title>
-      <!-- Bootstrap Core CSS -->
       <link rel="stylesheet" href="assets/css/bootstrap.min.css">
       <link rel="stylesheet" href="assets/css/main.css">
+      <link rel="stylesheet" href="assets/css/blogpage.css">
+      <link rel="stylesheet" href="assets/css/shoppingcart.css">
+      <link rel="stylesheet" href="assets/css/topbar.css">
+      <link rel="stylesheet" href="assets/css/checkoutbox.css">
       <link rel="stylesheet" href="assets/css/owl.carousel.css">
       <link rel="stylesheet" href="assets/css/owl.transitions.css">
       <link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
-      <!-- Favicon -->
    </head>
    <body class="cnt-home">
       <header>
-         <?php include('includes/top-header.php');?>
+         <?php include('includes/topHeader.php');?>
          <?php include('includes/main-header.php');?>
-         <?php include('includes/menu-bar.php');?>
+         <?php include('includes/newmenu.php');?>
       </header>
       <div class="body-content outer-top-xs" id="top-banner-and-menu">
       <div class="container">
          <div class="furniture-container homepage-container">
             <div class="row">
                <div class="col-xs-12 col-sm-12 col-md-3 sidebar">
-                  <?php include('includes/side-menu.php');?>
+                  <?php include('includes/sideNavi.php');?>
                </div>
                <div class="col-xs-12 col-sm-12 col-md-9 homebanner-holder">
                   <div id="hero" class="homepage-slider3">
@@ -68,20 +70,139 @@
                   </div>
                </div>
             </div>
-            <div class="sections prod-slider-small outer-top-small">
+            <div class='col-md-12'>
+
                <div class="row">
                   <div>
-                     <h1>New Arrivals</h1>
+                     <h1 style="text-align:center;">New Arrivals</h1>
                   </div>
+                  <div class="tab-pane">
+                     <div class="product-slider">
+                        <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
+                           <?php
+                              $ret=mysqli_query($con,"select * from products order by ID DESC LIMIT 4");
+                              while ($row=mysqli_fetch_array($ret)) 
+                              {
+                              ?>
+                           <div class="item item-carousel">
+                              <div class="products">
+                                 <div class="product">
+                                    <div class="product-image">
+                                       <div class="image">
+                                          <a href="product-details.php?pid=<?php echo htmlentities($row['id']);?>">
+                                          <img  src="admin/productimages/<?php echo htmlentities($row['id']);?>/<?php echo htmlentities($row['productImage1']);?>" data-echo="admin/productimages/<?php echo htmlentities($row['id']);?>/<?php echo htmlentities($row['productImage1']);?>"  width="150" height="150" alt=""></a>
+                                       </div>
+                                    </div>
+                                    <div class="product-info text-left">
+                                       <h3 class="name"><a href="product-details.php?pid=<?php echo htmlentities($row['id']);?>"><?php echo htmlentities($row['productName']);?></a></h3>
+                                       <div class="description"></div>
+                                       <div class="product-price">	
+                                          <span class="price">
+                                          Rs. <?php echo htmlentities($row['productPrice']);?>			</span>
+                                       </div>
+                                    </div>
+                                    <?php if($row['productAvailability']=='In Stock'){?>
+                                    <div class="action"><a href="index.php?page=product&action=add&id=<?php echo $row['id']; ?>" class="lnk btn btn-primary">Add to Cart</a></div>
+                                    <?php } else {?>
+                                    <div class="action" style="color:red">Out of Stock</div>
+                                    <?php } ?>
+                                 </div>
+                              </div>
+                           </div>
+                           <?php } ?>
+                        </div>
+                     </div>
+                  </div>
+                  <br><br>
+                  <div class="container">
                   <div>
-                     <h1>Todays Deal</h1>
+                     <h1 style="text-align:center;">Todays Deal</h1>
                   </div>
+
+                  <div class="tab-pane">
+                     <div class="product-slider">
+                        <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
+                           <?php
+                              $ret=mysqli_query($con,"select * from products order by ID DESC LIMIT 4");
+                              while ($row=mysqli_fetch_array($ret)) 
+                              {
+                              ?>
+                           <div class="item item-carousel">
+                              <div class="products">
+                                 <div class="product">
+                                    <div class="product-image">
+                                       <div class="image">
+                                          <a href="product-details.php?pid=<?php echo htmlentities($row['id']);?>">
+                                          <img  src="admin/productimages/<?php echo htmlentities($row['id']);?>/<?php echo htmlentities($row['productImage1']);?>" data-echo="admin/productimages/<?php echo htmlentities($row['id']);?>/<?php echo htmlentities($row['productImage1']);?>"  width="150" height="150" alt=""></a>
+                                       </div>
+                                    </div>
+                                    <div class="product-info text-left">
+                                       <h3 class="name"><a href="product-details.php?pid=<?php echo htmlentities($row['id']);?>"><?php echo htmlentities($row['productName']);?></a></h3>
+                                       <div class="description"></div>
+                                       <div class="product-price">	
+                                          <span class="price">
+                                          Rs. <?php echo htmlentities($row['productPrice']);?>			</span>
+                                          <span class="price-before-discount">Rs.<?php echo htmlentities($row['productPriceBeforeDiscount']);?></span>
+                                       </div>
+                                    </div>
+                                    <?php if($row['productAvailability']=='In Stock'){?>
+                                    <div class="action"><a href="index.php?page=product&action=add&id=<?php echo $row['id']; ?>" class="lnk btn btn-primary">Add to Cart</a></div>
+                                    <?php } else {?>
+                                    <div class="action" style="color:red">Out of Stock</div>
+                                    <?php } ?>
+                                 </div>
+                              </div>
+                           </div>
+                           <?php } ?>
+                        </div>
+                     </div>
+                  </div></div><br><br>
+                  <div class="container">
                   <div>
-                     <h1>Best Selling</h1>
+                     <h1 style="text-align:center;">Best Selling</h1>
                   </div>
+
+                  <div class="tab-pane">
+                     <div class="product-slider">
+                        <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
+                           <?php
+                              $ret=mysqli_query($con,"select * from products order by ID DESC LIMIT 4");
+                              while ($row=mysqli_fetch_array($ret)) 
+                              {
+                              ?>
+                           <div class="item item-carousel">
+                              <div class="products">
+                                 <div class="product">
+                                    <div class="product-image">
+                                       <div class="image">
+                                          <a href="product-details.php?pid=<?php echo htmlentities($row['id']);?>">
+                                          <img  src="admin/productimages/<?php echo htmlentities($row['id']);?>/<?php echo htmlentities($row['productImage1']);?>" data-echo="admin/productimages/<?php echo htmlentities($row['id']);?>/<?php echo htmlentities($row['productImage1']);?>"  width="150" height="150" alt=""></a>
+                                       </div>
+                                    </div>
+                                    <div class="product-info text-left">
+                                       <h3 class="name"><a href="product-details.php?pid=<?php echo htmlentities($row['id']);?>"><?php echo htmlentities($row['productName']);?></a></h3>
+                                       <div class="description"></div>
+                                       <div class="product-price">	
+                                          <span class="price">
+                                          Rs. <?php echo htmlentities($row['productPrice']);?>			</span>
+                                       </div>
+                                    </div>
+                                    <?php if($row['productAvailability']=='In Stock'){?>
+                                    <div class="action"><a href="index.php?page=product&action=add&id=<?php echo $row['id']; ?>" class="lnk btn btn-primary">Add to Cart</a></div>
+                                    <?php } else {?>
+                                    <div class="action" style="color:red">Out of Stock</div>
+                                    <?php } ?>
+                                 </div>
+                              </div>
+                           </div>
+                           <?php } ?>
+                        </div>
+                     </div>
+                  </div>
+                                       </div>
                </div>
             </div>
-            <?php include('includes/brands-slider.php');?>
+            
          </div>
       </div>
       <?php include('includes/footer.php');?>

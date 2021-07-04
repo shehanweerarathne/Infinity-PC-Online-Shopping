@@ -35,35 +35,32 @@ header('location:payment-method.php');
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<!-- Meta -->
 		<meta charset="utf-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-		<meta name="description" content="">
-		<meta name="author" content="">
-	    <meta name="keywords" content="MediaCenter, Template, eCommerce">
-	    <meta name="robots" content="all">
+	
 
 	    <title>My Cart</title>
 	    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	    <link rel="stylesheet" href="assets/css/main.css">
-	    <link rel="stylesheet" href="assets/css/green.css">
+		<link rel="stylesheet" href="assets/css/blogpage.css">
+      <link rel="stylesheet" href="assets/css/shoppingcart.css">
+      <link rel="stylesheet" href="assets/css/topbar.css">
+      <link rel="stylesheet" href="assets/css/checkoutbox.css">
+		<link rel="stylesheet" href="assets/css/shoppingcart.css">
 	    <link rel="stylesheet" href="assets/css/owl.carousel.css">
 		<link rel="stylesheet" href="assets/css/owl.transitions.css">
-		<!--<link rel="stylesheet" href="assets/css/owl.theme.css">-->
 		<link href="assets/css/lightbox.css" rel="stylesheet">
 		<link rel="stylesheet" href="assets/css/animate.min.css">
 		<link rel="stylesheet" href="assets/css/rateit.css">
 		<link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
 
-		<!-- Demo Purpose Only. Should be removed in production -->
 		<link rel="stylesheet" href="assets/css/config.css">
 
 		
 
 		
 		<!-- Icons/Glyphs -->
-		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
 
         <!-- Fonts --> 
 		<link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
@@ -76,9 +73,9 @@ header('location:payment-method.php');
 	
 	
 <header >
-<?php include('includes/top-header.php');?>
+<?php include('includes/topHeader.php');?>
 <?php include('includes/main-header.php');?>
-<?php include('includes/menu-bar.php');?>
+<?php include('includes/newmenu.php');?>
 </header>
 
 
@@ -131,35 +128,31 @@ if(!empty($_SESSION['cart'])){
 			if(!empty($query)){
 			while($row = mysqli_fetch_array($query)){
 				$quantity=$_SESSION['cart'][$row['id']]['quantity'];
-				$subtotal= $_SESSION['cart'][$row['id']]['quantity']*$row['productPrice']+$row['shippingCharge'];
+				$subtotal= $_SESSION['cart'][$row['id']]['quantity']*$row['productPrice'];
 				$totalprice += $subtotal;
 				$_SESSION['qnty']=$totalqunty+=$quantity;
 
 				array_push($pdtid,$row['id']);
-//print_r($_SESSION['pid'])=$pdtid;exit;
 	?>
 
 				<tr>
 					
 					<td class="cart-image">
 						<a class="entry-thumbnail" href="detail.html">
-						    <img src="admin/productimages/<?php echo $row['id'];?>/<?php echo $row['productImage1'];?>" alt="" width="114" height="146">
+						    <img src="admin/productimages/<?php echo $row['id'];?>/<?php echo $row['productImage1'];?>" alt="" width="100" height="100">
 						</a>
 					</td>
 					<td class="cart-product-name-info">
 						<h4 class='cart-product-description'><a href="product-details.php?pid=<?php echo htmlentities($pd=$row['id']);?>" ><?php echo $row['productName'];
 
-$_SESSION['sid']=$pd;
+							$_SESSION['sid']=$pd;
 						 ?></a></h4>
 						
 						
 					</td>
 					<td class="cart-product-quantity">
 						<div class="quant-input">
-				                <div class="arrows">
-				                  <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
-				                  <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
-				                </div>
+				                
 				             <input type="text" value="<?php echo $_SESSION['cart'][$row['id']]['quantity']; ?>" name="quantity[<?php echo $row['id']; ?>]">
 				             
 			              </div>
@@ -167,18 +160,18 @@ $_SESSION['sid']=$pd;
 					<td class="cart-product-sub-total"><span class="cart-sub-total-price"><?php echo "Rs"." ".$row['productPrice']; ?>.00</span></td>
 
 
-					<td class="cart-product-grand-total"><span class="cart-grand-total-price"><?php echo ($_SESSION['cart'][$row['id']]['quantity']*$row['productPrice']+$row['shippingCharge']); ?>.00</span></td>
+					<td class="cart-product-grand-total"><span class="cart-grand-total-price"><?php echo ($_SESSION['cart'][$row['id']]['quantity']*$row['productPrice']); ?>.00</span></td>
 				</tr>
 
 				<?php } }
-$_SESSION['pid']=$pdtid;
+					$_SESSION['pid']=$pdtid;
 				?>
 				
-			</tbody><!-- /tbody -->
-		</table><!-- /table -->
+			</tbody>
+		</table>
 		
 	</div>
-</div><!-- /.shopping-cart-table -->			
+</div>
 
 
 <div class="col-md-4 col-sm-12 cart-shopping-total">
@@ -188,11 +181,11 @@ $_SESSION['pid']=$pdtid;
 				<th>
 					
 					<div class="cart-grand-total">
-						Grand Total<span class="inner-left-md"><?php echo $_SESSION['tp']="$totalprice". ".00"; ?></span>
+						Total<span class="inner-left-md"><?php echo $_SESSION['tp']="$totalprice". ".00"; ?></span>
 					</div>
 				</th>
 			</tr>
-		</thead><!-- /thead -->
+		</thead>
 		<tbody>
 				<tr>
 					<td>
@@ -202,7 +195,7 @@ $_SESSION['pid']=$pdtid;
 						</div>
 					</td>
 				</tr>
-		</tbody><!-- /tbody -->
+		</tbody>
 	</table>
 	<?php } else {
 echo "Your shopping Cart is empty";
@@ -210,7 +203,7 @@ echo "Your shopping Cart is empty";
 </div>			</div>
 		</div> 
 		</form>
-<?php echo include('includes/brands-slider.php');?>
+
 </div>
 </div>
 <?php include('includes/footer.php');?>
@@ -231,7 +224,7 @@ echo "Your shopping Cart is empty";
     <script src="assets/js/wow.min.js"></script>
 	<script src="assets/js/scripts.js"></script>
 
-	<!-- For demo purposes – can be removed on production -->
+
 
 </body>
 </html>

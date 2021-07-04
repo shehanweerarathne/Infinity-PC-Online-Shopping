@@ -30,16 +30,20 @@
       <title>Product Details</title>
       <link rel="stylesheet" href="assets/css/bootstrap.min.css">
       <link rel="stylesheet" href="assets/css/main.css">
+      <link rel="stylesheet" href="assets/css/blogpage.css">
+      <link rel="stylesheet" href="assets/css/shoppingcart.css">
+      <link rel="stylesheet" href="assets/css/topbar.css">
+      <link rel="stylesheet" href="assets/css/checkoutbox.css">
       <link rel="stylesheet" href="assets/css/owl.carousel.css">
       <link rel="stylesheet" href="assets/css/config.css">
-      <link rel="stylesheet" href="assets/css/font-awesome.min.css">
    </head>
    <body class="cnt-home">
       <header>
-         <?php include('includes/top-header.php');?>
+         <?php include('includes/topHeader.php');?>
          <?php include('includes/main-header.php');?>
-         <?php include('includes/menu-bar.php');?>
+         <?php include('includes/newmenu.php');?>
       </header>
+      
       <div class="breadcrumb">
          <div class="container">
             <div class="breadcrumb-inner">
@@ -63,7 +67,7 @@
                {
                
                ?>
-            <div class='col-md-9'>
+            <div class='col-md-12'>
                <div class="row  wow fadeInUp">
                   <div class="col-xs-12 col-sm-6 col-md-5 gallery-holder">
                      <div class="product-item-holder size-big single-product-gallery small-gallery">
@@ -115,70 +119,135 @@
                      </div>
                   </div>
                   <div class='col-sm-6 col-md-7 product-info-block'>
-                     <div class="product-info">
-                        <h1 class="name"><?php echo htmlentities($row['productName']);?></h1>
-                        <?php $rt=mysqli_query($con,"select * from productreviews where productId='$pid'");
-                           $num=mysqli_num_rows($rt);
-                           {
-                           ?>		
-                        <?php } ?>
-                        <div class="price-container info-container m-t-20">
-                           <div class="row">
-                              <div class="col-sm-6">
-                                 <div class="price-box">
-                                    <span>Rs. <?php echo htmlentities($row['productPrice']);?></span>
+                        <div class="product-info">
+                           <h1 class="name"></h1>
+                          
+                           <div class="rating-reviews m-t-20">
+                              <div class="row">
+                                 <div class="col-sm-3">
+                                    <div class="rating rateit-small"></div>
                                  </div>
-                              </div>
-                           </div>
-                           <!-- /.row -->
-                        </div>
-                        <!-- /.price-container -->
-                        <div class="quantity-container info-container">
-                           <div class="row">
-                              <div class="col-sm-2">
-                                 <span class="label">Qty :</span>
-                              </div>
-                              <div class="col-sm-2">
-                                 <div class="cart-quantity">
-                                    <div class="quant-input">
-                                       <div class="arrows">
-                                          <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
-                                          <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
-                                       </div>
-                                       <input type="text" value="1">
+                                 <div class="col-sm-8">
+                                    <div class="reviews">
+                                       <a href="#" class="lnk"></a>
                                     </div>
                                  </div>
                               </div>
-                              <div class="col-sm-7">
-                                 <?php if($row['productAvailability']=='In Stock'){?>
-                                 <a href="product-details.php?page=product&action=add&id=<?php echo $row['id']; ?>" class="btn btn-dark"> ADD TO CART</a>
-                                 <?php } else {?>
-                                 <div class="action" style="color:red">Out of Stock</div>
-                                 <?php } ?>
-                              </div>
+                              <!-- /.row -->		
                            </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+                           <div class="stock-container info-container m-t-10">
+                           <h3><span><?php echo htmlentities($row['productName']);?></span></h3>
+
+                              <div class="row">
+                                 <div class="col-sm-3">
+                                    <div class="stock-box">
+                                       <span class="label">Availability :</span>
+                                    </div>
+                                 </div>
+                                 <div class="col-sm-9">
+                                    <div class="stock-box">
+                                       <span class="value"><?php echo htmlentities($row['productAvailability']);?></span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- /.row -->	
+                           </div>
+                           <div class="stock-container info-container m-t-10">
+                              <div class="row">
+                                 <div class="col-sm-3">
+                                    <div class="stock-box">
+                                       <span class="label">Product Brand :</span>
+                                    </div>
+                                 </div>
+                                 <div class="col-sm-9">
+                                    <div class="stock-box">
+                                       <span class="value"><?php echo htmlentities($row['productCompany']);?></span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- /.row -->	
+                           </div>
+
+                           <div class="stock-container info-container m-t-10">
+                              <div class="row">
+                                 <div class="col-sm-3">
+                                    <div class="stock-box">
+                                       <span class="label">Warranty</span>
+                                    </div>
+                                 </div>
+                                 <div class="col-sm-9">
+                                    <div class="stock-box">
+                                       <span class="value"><?php echo htmlentities($row['warranty']);?></span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- /.row -->	
+                           </div>
+                           
+                           <div class="price-container info-container m-t-20">
+                              <div class="row">
+                                 <div class="col-sm-6">
+                                    <div class="price-box">
+                                       <span class="price">Rs. <?php echo htmlentities($row['productPrice']);?></span>
+                                       
+                                       <span class="price-strike">Rs.<?php echo htmlentities($row['productPriceBeforeDiscount']);?></span>
+                                    </div>
+                                 </div>
+                                
+                              </div>
+                              <!-- /.row -->
+                           </div>
+                           <div class="cart clearfix animate-effect">
+                                    <div class="action">
+                                       <div class="add-cart-button btn-group">
+                                          <?php if($row['productAvailability']=='In Stock'){?>
+                                          </button>
+                                          <a href="category.php?page=product&action=add&id=<?php echo $row['id']; ?>">
+                                          <button class="btn btn-primary" type="button">Add to cart</button></a>
+                                          <?php } else {?>
+                                          <div class="action" style="color:red">Out of Stock</div>
+                                          <?php } ?>
+                                       </div>
+                                    </div>
+                                    <!-- /.action -->
+                                 </div>
                <div class="product-tabs inner-bottom-xs  wow fadeInUp">
-                  <div class="row">
-                     <div class="col-sm-3">
+                     <div class="row">
+                       
+                        <div class="col-sm-9">
                         <ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
-                           <li><a data-toggle="tab" href="#description">DESCRIPTION</a></li>
-                        </ul>
-                     </div>
-                     <div class="col-sm-9">
-                        <div class="tab-content">
-                           <div id="description" class="tab-pane in active">
-                              <div class="product-tab">
-                                 <p class="text"><?php echo $row['productDescription'];?></p>
+                              <li class="active"><h4>PRODUCT DESCRIPTION</h4></li>
+                              
+                           </ul>
+                           <div class="tab-content">
+                              <div id="description" class="tab-pane in active">
+                                 <div class="product-tab">
+                                    <p class="text"><?php echo $row['productDescription'];?></p>
+                                 </div>
                               </div>
+                              <!-- /.tab-pane -->
+                              <div id="review" class="tab-pane">
+                                 <div class="product-tab">
+                                    <div class="product-reviews">
+                                       
+                                    </div>
+                                    <!-- /.product-reviews -->
+                                   
+                                    <!-- /.cnt-form -->
+                                    </div><!-- /.form-container -->
+                                    </div><!-- /.review-form -->
+                                    </div><!-- /.product-add-review -->										
+                                 </div>
+                                 <!-- /.product-tab -->
+                              </div>
+                              <!-- /.tab-pane -->
                            </div>
+                           <!-- /.tab-content -->
                         </div>
+                        <!-- /.col -->
                      </div>
+                     <!-- /.row -->
                   </div>
-               </div>
             </div>
             <?php $cid=$row['category'];
                $subcid=$row['subCategory']; } ?>
