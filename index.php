@@ -123,7 +123,7 @@
                      <div class="product-slider">
                         <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
                            <?php
-                              $ret=mysqli_query($con,"select * from products order by ID DESC LIMIT 4");
+                              $ret=mysqli_query($con,"select * from products where productPriceBeforeDiscount < productPrice order by ID DESC LIMIT 4");
                               while ($row=mysqli_fetch_array($ret)) 
                               {
                               ?>

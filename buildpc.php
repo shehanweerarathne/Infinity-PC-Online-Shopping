@@ -14,12 +14,12 @@
       $mboard=$_POST['mboard'];
       $ram=$_POST['ram'];
       $hdd=$_POST['hdd'];
-      $psupply=$_POST['psupply'];
+      $psu=$_POST['psu'];
       $casing=$_POST['case'];
       $cooler=$_POST['cooler'];
       $gpu=$_POST['gpu'];
    // mysqli_query($con,"insert into pcbuildorders(userId,category,cpu,mboard,ram,hdd,psu,casing,cooler,gpu) values('0','1','2','3','4','5','6','7','7','8')");
-      mysqli_query($con,"insert into pcbuildorders(userId,category,cpu,mboard,ram,hdd,psu,casing,cooler,gpu) values('".$_SESSION['id']."','$category','$cpu','$mboard','$ram','$hdd','$psupply','$casing','$cooler','$gpu')");
+      mysqli_query($con,"insert into pcbuildorders(userId,category,cpu,mboard,ram,hdd,psu,casing,cooler,gpu) values('".$_SESSION['id']."','$category','$cpu','$mboard','$ram','$hdd','$psu','$casing','$cooler','$gpu')");
       header('location:buildpc-payment-method.php');
 
 }}
@@ -41,6 +41,22 @@
       <link href="assets/css/lightbox.css" rel="stylesheet">
       <link rel="stylesheet" href="assets/css/animate.min.css">
       <link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
+
+      <script>
+function getSubcat(val) {
+	$.ajax({
+	type: "POST",
+	url: "get_subcat.php",
+	data:'cat_id='+val,
+	success: function(data){
+		$("#subcategory").html(data);
+	}
+	});
+}
+
+
+
+</script>	
    </head>
    <body class="cnt-home">
       <header>
@@ -107,27 +123,7 @@
                                   
                                  </tr>
 
-                                 <tr>
-                                    
-                                    <td>
-                                    <label class="control-label" for="basicinput">Processor</label>
-
-                                    </td>
-
-
-                                    <td>
-                                    <select name="cpu" class="span8 tip" onChange=" " >
-                                       <option value="">Select Processor</option> 
-                                       <?php $query=mysqli_query($con,"select * from products where category=1");
-                                       while($row=mysqli_fetch_array($query))
-                                       {?>
-
-                                       <option value="<?php echo $row['id'];?>"><?php echo $row['productName'];?></option>
-                                       <?php } ?>
-                                    </select>
-                                    </td>
-                                  
-                                 </tr>
+                                
 
                                  <tr>
                                     
@@ -138,14 +134,28 @@
 
 
                                     <td>
-                                    <select name="mboard" class="span8 tip" onChange=" " >
-                                       <option value="">Select MotherBoard</option> 
-                                       <?php $query=mysqli_query($con,"select * from products where category=2");
-                                       while($row=mysqli_fetch_array($query))
-                                       {?>
+                                    <select name="category" class="span8 tip" onChange="getSubcat(this.value); getBrand(this.value);"  required>
+                                    <option value="">Select Category</option> 
+                                    <?php $query=mysqli_query($con,"select * from products where category=2");
+                                    while($row=mysqli_fetch_array($query))
+                                    {?>
+                                    <option value="<?php echo $row['subCategory'];?>"><?php echo $row['productName'];?></option>
+                                    <?php } ?>
+                                    </select>
+                                    </td>
+                                  
+                                 </tr>
 
-                                       <option value="<?php echo $row['id'];?>"><?php echo $row['productName'];?></option>
-                                       <?php } ?>
+                                 <tr>
+                                    
+                                    <td>
+                                    <label class="control-label" for="basicinput">Processor</label>
+
+                                    </td>
+
+
+                                    <td>
+                                    <select   name="subcategory"  id="subcategory" class="span8 tip" required>
                                     </select>
                                     </td>
                                   
@@ -206,7 +216,7 @@
 
 
                                     <td>
-                                    <select name="psupply" class="span8 tip" onChange=" ">
+                                    <select name="psu" class="span8 tip" onChange=" ">
                                        <option value="">Select Power Supply</option> 
                                        <?php $query=mysqli_query($con,"select * from products where category=5");
                                        while($row=mysqli_fetch_array($query))
@@ -330,5 +340,6 @@
       <script src="assets/js/bootstrap-select.min.js"></script>
       <script src="assets/js/wow.min.js"></script>
       <script src="assets/js/scripts.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
    </body>
 </html>

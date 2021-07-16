@@ -8,6 +8,13 @@
 							
 						</ul>
 
+                            <ul class="widget widget-menu unstyled">
+                                <li><h3 style="text-align:center;">Sales Report</h3></li>
+                                <li><a href="sales-report.php"><i class="menu-icon icon-paste"></i>Sales Report</a></li>
+                               
+                        
+                            </ul>
+
 
 							<ul class="widget widget-menu unstyled">
                                 <li><h3 style="text-align:center;">Manage Products </h3></li>
@@ -26,17 +33,25 @@
 							
 							<ul class="widget widget-menu unstyled">
                                 <li><h3 style="text-align:center;">Manage Users </h3></li>
-                                <li><a href="insert-product.php"><i class="menu-icon icon-paste"></i>View Users </a></li>
-                                <li><a href="manage-products.php"><i class="menu-icon icon-table"></i>Edit Edit </a></li>
+                                <li><a href="manage-users.php"><i class="menu-icon icon-paste"></i>View Users </a></li>
+                               
                         
                             </ul>
+
                             <ul class="widget widget-menu unstyled">
-                                <li><h3 style="text-align:center;">Manage Custome PC</h3></li>
+                                <li><h3 style="text-align:center;">Manage Subcategories</h3></li>
+                                <li><a href="subcategory.php"><i class="menu-icon icon-paste"></i>Subcategory</a></li>
+                                <li><a href="edit-subcategory.php"><i class="menu-icon icon-table"></i>Edit Subcategory </a></li>
+                        
+                            </ul>
+
+                            <ul class="widget widget-menu unstyled">
+                                <li><h3 style="text-align:center;">Manage Custom PC Builder</h3></li>
                                 <li><a href="insert-combinations.php"><i class="menu-icon icon-paste"></i>Insert Combinations</a></li>
                                 <li><a href="manage-combinations.php"><i class="menu-icon icon-table"></i>Edit Combinations </a></li>
                         
-                            </ul><!--/.widget-nav-->
+                            </ul>
 
-
-					</div><!--/.sidebar-->
-				</div><!--/.span3-->
+                            
+					</div>
+				</div>

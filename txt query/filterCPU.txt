@@ -1,0 +1,17 @@
+SELECT * FROM `products` WHERE subCategory IN (SELECT cpu1,cpu2 FROM pccombinations WHERE cpu1=7 OR cpu2=7)
+
+SELECT cpu1,cpu2 FROM pccombinations WHERE cpu1=7 OR cpu2=7
+
+SELECT * FROM `products` WHERE subCategory = (SELECT cpu1 FROM pccombinations WHERE cpu1 =7)
+
+SELECT * FROM `products` WHERE subCategory IN (SELECT cpu1 FROM pccombinations WHERE cpu1 =7)
+
+SELECT * FROM `products` WHERE subCategory IN (SELECT cpu1 FROM pccombinations WHERE cpu1 =7 OR cpu2 = 7)
+SELECT * FROM pccombinations WHERE CONCAT_WS('', cpu1, cpu2) LIKE '%7%'
+
+
+select value from yourtable unpivot (value for col in (I1, I2, I3)) un order by id, col;
+
+
+
+SELECT * FROM `products` WHERE subCategory IN (SELECT cpu1 FROM pccombinations WHERE mboard =18)

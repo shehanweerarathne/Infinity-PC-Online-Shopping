@@ -1,0 +1,5 @@
+SELECT * FROM `orders` WHERE orderSession = (SELECT MAX(orderSession) FROM orders)
+
+select products.*,category.categoryName,subcategory.subcategory from products join category on category.id=products.category join subcategory on subcategory.id=products.subCategory
+
+select products.*,orders.* from products join orders on orders.productId = products.id WHERE orders.orderSession = (SELECT MAX(orderSession) FROM orders)

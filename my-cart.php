@@ -3,7 +3,11 @@ session_start();
 error_reporting(0);
 include('includes/config.php');
 
-
+$sessionquery = "SELECT MAX(orderSession) AS LastSession FROM `orders` LIMIT 1";
+$sql=mysqli_query($con,$sessionquery);
+$rw   = mysqli_fetch_row($sql);
+$lastsession=$rw[0];
+$thisSession = $lastsession + 1;
 if(isset($_POST['ordersubmit'])) 
 {
 	
@@ -22,7 +26,7 @@ else{
 
 
 
-mysqli_query($con,"insert into orders(userId,productId,quantity) values('".$_SESSION['id']."','$qty','$val34')");
+mysqli_query($con,"insert into orders(userId,productId,quantity,orderSession) values('".$_SESSION['id']."','$qty','$val34','$thisSession')");
 header('location:payment-method.php');
 }
 }
